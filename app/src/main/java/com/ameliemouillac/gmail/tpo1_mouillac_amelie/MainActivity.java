@@ -2,7 +2,9 @@ package com.ameliemouillac.gmail.tpo1_mouillac_amelie;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,8 +14,6 @@ import com.ameliemouillac.gmail.tpo1_mouillac_amelie.databinding.ActivityMainBin
 
 public class MainActivity extends AppCompatActivity {
 
-    private Integer counterValue = 0;
-
     ActivityMainBinding binding;
 
     @Override
@@ -22,33 +22,36 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        this.setCounterEvent();
-        this.setAddEvent();
+        this.setButtonsEvents();
     }
 
-    // Exercice 1
-    private void setCounterEvent() {
-        binding.counter.setText(String.valueOf(this.counterValue));
-        binding.toast.setOnClickListener(new View.OnClickListener() {
+    private void setButtonsEvents() {
+        binding.calculsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, String.valueOf(counterValue), Toast.LENGTH_SHORT).show();
+                Intent intention = new Intent(MainActivity.this, CalculsActivity.class);
+                startActivity(intention);
             }
         });
-        binding.count.setOnClickListener(new View.OnClickListener() {
+
+        binding.mailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counterValue += 1;
-                binding.counter.setText(String.valueOf(counterValue));
+                sendEmail();
             }
         });
     }
 
-    // Exercice 2
-    private void setAddEvent() {
-        binding.additionButton.setOnClickListener(v -> {
-            int value = Integer.parseInt(binding.number1TV.getText().toString()) + Integer.parseInt(binding.number2TV.getText().toString());
-            binding.additionResponseTV.setText("" + value);
-        });
+    private void sendEmail() {
+        Intent email = new Intent(Intent.ACTION_SEND);
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{ "ameliemouillacpro@gmail.com"});
+        email.putExtra(Intent.EXTRA_SUBJECT, "Test Android Mail");
+        email.putExtra(Intent.EXTRA_TEXT, binding.mailContentTV.getText().toString());
+
+        //need this to prompts email client only
+        email.setType("message/rfc822");
+
+        startActivity(email);
     }
+
 }
