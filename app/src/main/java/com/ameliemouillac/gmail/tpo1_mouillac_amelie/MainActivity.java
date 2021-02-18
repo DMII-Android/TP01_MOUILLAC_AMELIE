@@ -8,39 +8,47 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ameliemouillac.gmail.tpo1_mouillac_amelie.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
 
-    private TextView counterTV;
     private Integer counterValue = 0;
+
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        this.initView();
+        this.setCounterEvent();
+        this.setAddEvent();
     }
 
-    private void initView() {
-        Button toastBtn = findViewById(R.id.toast);
-        Button countBtn = findViewById(R.id.count);
-        this.counterTV = findViewById(R.id.counter);
-
-        this.counterTV.setText(String.valueOf(this.counterValue));
-
-        toastBtn.setOnClickListener(new View.OnClickListener() {
+    // Exercice 1
+    private void setCounterEvent() {
+        binding.counter.setText(String.valueOf(this.counterValue));
+        binding.toast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, String.valueOf(counterValue), Toast.LENGTH_SHORT).show();
             }
         });
-
-        countBtn.setOnClickListener(new View.OnClickListener() {
+        binding.count.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 counterValue += 1;
-                counterTV.setText(String.valueOf(counterValue));
+                binding.counter.setText(String.valueOf(counterValue));
             }
+        });
+    }
+
+    // Exercice 2
+    private void setAddEvent() {
+        binding.additionButton.setOnClickListener(v -> {
+            int value = Integer.parseInt(binding.number1TV.getText().toString()) + Integer.parseInt(binding.number2TV.getText().toString());
+            binding.additionResponseTV.setText("" + value);
         });
     }
 }

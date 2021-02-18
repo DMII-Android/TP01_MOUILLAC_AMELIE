@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TPO1_MOUILLAC_AMELIE</string>
+    <string name="add_button">Add</string>
+    <string name="add_result">...</string>
+    <string name="number_2">Number 2</string>
+    <string name="number_1">Number 1</string>
+    <string name="count_button">Count</string>
+    <string name="count_result">...</string>
+    <string name="toast_button">Toast</string>
 </resources>
