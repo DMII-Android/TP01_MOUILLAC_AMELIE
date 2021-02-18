@@ -7,4 +7,7 @@
     <string name="count_button">Count</string>
     <string name="count_result">...</string>
     <string name="toast_button">Toast</string>
+    <string name="mail_content">Mail content</string>
+    <string name="send_mail_button">Send Mail</string>
+    <string name="to_calculs_button">To Calculs</string>
 </resources>
