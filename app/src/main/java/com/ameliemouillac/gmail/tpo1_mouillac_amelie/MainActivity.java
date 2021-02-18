@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ameliemouillac.gmail.tpo1_mouillac_amelie.databinding.ActivityMainBinding;
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +25,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         this.setButtonsEvents();
+
+        //Picasso.get()
+                //.load("https://media.tacdn.com/media/attractions-splice-spp-674x446/07/26/3c/87.jpg")
+                //.into(binding.myImage);
+
+        String panda = "http://assets.stickpng.com/images/589c80bb64b351149f22a81e.png";
+        String panda2 = "https://media.tacdn.com/media/attractions-splice-spp-674x446/07/26/3c/87.jpg";
+
+
+        Glide.with(MainActivity.this).load(panda2).into(binding.myImage);
     }
 
     private void setButtonsEvents() {
